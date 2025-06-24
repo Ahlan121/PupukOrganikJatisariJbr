@@ -2,56 +2,63 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pemesanan Pupuk</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Pupuk Organik</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             background: #e8f5e9;
-            margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
         
-        .card {
+        .container {
             background: white;
+            padding: 25px 30px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
+            width: 100%;
+            max-width: 420px;
+        }
+        
+        h2 {
             text-align: center;
-            padding: 20px;
-        }
-        
-        .card img {
-            max-width: 100%;
-            border-radius: 12px;
-        }
-        
-        h1 {
             color: #2e7d32;
-            margin: 15px 0 5px;
+            margin-bottom: 20px;
         }
         
-        p.slogan {
-            color: #4caf50;
-            font-style: italic;
-            margin: 5px 0 20px;
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
         
         button {
             background-color: #43a047;
-            border: none;
             color: white;
-            font-size: 18px;
-            padding: 15px 25px;
+            border: none;
+            padding: 14px;
             border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 16px;
+            margin-top: 20px;
             width: 100%;
+            cursor: pointer;
         }
         
         button:hover {
@@ -62,25 +69,49 @@
 
 <body>
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1604537529428-9e7c1c947e60?auto=format&fit=crop&w=400&q=80" alt="Pupuk Organik" />
-        <h1>Pupuk Berkualitas</h1>
-        <p class="slogan">Mendukung pertanian sehat & hasil panen melimpah</p>
-        <button id="orderBtn">Pesan Sekarang</button>
+    <div class="container">
+        <h2>Formulir Pemesanan Pupuk</h2>
+        <form id="orderForm">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama" name="nama" required>
+
+            <label for="alamat">Alamat</label>
+            <textarea id="alamat" name="alamat" rows="2" required></textarea>
+
+            <label for="produk">Jenis Pupuk</label>
+            <select id="produk" name="produk" required>
+                <option value="Pupuk Organik">Pupuk Organik</option>
+                <option value="Pupuk Kompos">Pupuk Kompos</option>
+                <option value="Pupuk Cair">Pupuk Cair</option>
+            </select>
+
+            <label for="jumlah">Jumlah (kg)</label>
+            <input type="number" id="jumlah" name="jumlah" required>
+
+            <label for="kontak">Nomor Kontak</label>
+            <input type="text" id="kontak" name="kontak" required>
+
+            <button type="submit">Kirim via WhatsApp</button>
+        </form>
     </div>
 
     <script>
-        document.getElementById('orderBtn').addEventListener('click', function() {
-            // Nomor WhatsApp admin (ganti nomor dengan yang kamu punya)
-            const adminPhone = '62881080293621';
+        document.getElementById("orderForm").addEventListener("submit", function(e) {
+            e.preventDefault();
 
-            // Pesan statis contoh, kamu bisa ganti sesuai kebutuhan
-            const message = encodeURIComponent(
-                `Halo Admin, saya ingin memesan pupuk.\nNama: Ahlan\nAlamat: Jatisari\nProduk: Pupuk Organik\nJumlah: 10 kg\nKontak: 08123456789`
-            );
+            const nama = document.getElementById("nama").value;
+            const alamat = document.getElementById("alamat").value;
+            const produk = document.getElementById("produk").value;
+            const jumlah = document.getElementById("jumlah").value;
+            const kontak = document.getElementById("kontak").value;
 
-            const waUrl = `https://wa.me/${adminPhone}?text=${message}`;
-            window.open(waUrl, '_blank');
+            const adminPhone = "62881080293621"; // Ganti dengan nomor WhatsApp admin
+
+            const pesan = `Halo Admin, saya ingin memesan pupuk:\n\nNama: ${nama}\nAlamat: ${alamat}\nProduk: ${produk}\nJumlah: ${jumlah} kg\nKontak: ${kontak}`;
+
+            const url = `https://wa.me/${adminPhone}?text=${encodeURIComponent(pesan)}`;
+
+            window.open(url, '_blank');
         });
     </script>
 
