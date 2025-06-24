@@ -81,11 +81,9 @@
             <label for="produk">Jenis Pupuk</label>
             <select id="produk" name="produk" required>
                 <option value="Pupuk Organik">Pupuk Organik</option>
-                <option value="Pupuk Kompos">Pupuk Kompos</option>
-                <option value="Pupuk Cair">Pupuk Cair</option>
             </select>
 
-            <label for="jumlah">Jumlah (kg)</label>
+            <label for="jumlah">Jumlah (karung)</label>
             <input type="number" id="jumlah" name="jumlah" required>
 
             <label for="kontak">Nomor Kontak</label>
