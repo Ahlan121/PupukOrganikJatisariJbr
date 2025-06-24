@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="id">
 
 <head>
@@ -105,7 +105,7 @@
 
             const adminPhone = "62881080293621"; // Ganti dengan nomor WhatsApp admin
 
-            const pesan = `Halo Admin, saya ingin memesan pupuk:\n\nNama: ${nama}\nAlamat: ${alamat}\nProduk: ${produk}\nJumlah: ${jumlah} kg\nKontak: ${kontak}`;
+            const pesan = `Halo Admin, saya ingin memesan pupuk:\n\nNama: ${nama}\nAlamat: ${alamat}\nProduk: ${produk}\nJumlah: ${jumlah} karung\nKontak: ${kontak}`;
 
             const url = `https://wa.me/${adminPhone}?text=${encodeURIComponent(pesan)}`;
 
