@@ -1,2 +1,89 @@
-# PupukOrganikJatisariJbr
-Web
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pemesanan Pupuk</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e8f5e9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .card img {
+            max-width: 100%;
+            border-radius: 12px;
+        }
+        
+        h1 {
+            color: #2e7d32;
+            margin: 15px 0 5px;
+        }
+        
+        p.slogan {
+            color: #4caf50;
+            font-style: italic;
+            margin: 5px 0 20px;
+        }
+        
+        button {
+            background-color: #43a047;
+            border: none;
+            color: white;
+            font-size: 18px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        
+        button:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1604537529428-9e7c1c947e60?auto=format&fit=crop&w=400&q=80" alt="Pupuk Organik" />
+        <h1>Pupuk Berkualitas</h1>
+        <p class="slogan">Mendukung pertanian sehat & hasil panen melimpah</p>
+        <button id="orderBtn">Pesan Sekarang</button>
+    </div>
+
+    <script>
+        document.getElementById('orderBtn').addEventListener('click', function() {
+            // Nomor WhatsApp admin (ganti nomor dengan yang kamu punya)
+            const adminPhone = '62881080293621';
+
+            // Pesan statis contoh, kamu bisa ganti sesuai kebutuhan
+            const message = encodeURIComponent(
+                `Halo Admin, saya ingin memesan pupuk.\nNama: Ahlan\nAlamat: Jatisari\nProduk: Pupuk Organik\nJumlah: 10 kg\nKontak: 08123456789`
+            );
+
+            const waUrl = `https://wa.me/${adminPhone}?text=${message}`;
+            window.open(waUrl, '_blank');
+        });
+    </script>
+
+</body>
+
+</html>
