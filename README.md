@@ -1,4 +1,5 @@
 
+<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -15,7 +16,7 @@
             height: 100vh;
             margin: 0;
         }
-        
+
         .container {
             background: white;
             padding: 25px 30px;
@@ -24,20 +25,20 @@
             width: 100%;
             max-width: 420px;
         }
-        
+
         h2 {
             text-align: center;
             color: #2e7d32;
             margin-bottom: 20px;
         }
-        
+
         label {
             display: block;
             margin-top: 10px;
             font-weight: bold;
             color: #555;
         }
-        
+
         input,
         select,
         textarea {
@@ -48,7 +49,7 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
-        
+
         button {
             background-color: #43a047;
             color: white;
@@ -60,9 +61,15 @@
             width: 100%;
             cursor: pointer;
         }
-        
+
         button:hover {
             background-color: #388e3c;
+        }
+
+        .total-harga {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #2e7d32;
         }
     </style>
 </head>
@@ -84,7 +91,9 @@
             </select>
 
             <label for="jumlah">Jumlah (karung)</label>
-            <input type="number" id="jumlah" name="jumlah" required>
+            <input type="number" id="jumlah" name="jumlah" required min="1">
+
+            <div id="totalHargaDisplay" class="total-harga"></div>
 
             <label for="kontak">Nomor Kontak</label>
             <input type="text" id="kontak" name="kontak" required>
@@ -94,18 +103,40 @@
     </div>
 
     <script>
+        const hargaPerKarung = 20000;
+        const jumlahInput = document.getElementById("jumlah");
+        const totalHargaDisplay = document.getElementById("totalHargaDisplay");
+
+        jumlahInput.addEventListener("input", () => {
+            const jumlah = parseInt(jumlahInput.value) || 0;
+            const totalHarga = jumlah * hargaPerKarung;
+            if (jumlah > 0) {
+                totalHargaDisplay.textContent = "Total Harga: Rp" + totalHarga.toLocaleString('id-ID');
+            } else {
+                totalHargaDisplay.textContent = "";
+            }
+        });
+
         document.getElementById("orderForm").addEventListener("submit", function(e) {
             e.preventDefault();
 
             const nama = document.getElementById("nama").value;
             const alamat = document.getElementById("alamat").value;
             const produk = document.getElementById("produk").value;
-            const jumlah = document.getElementById("jumlah").value;
+            const jumlah = parseInt(document.getElementById("jumlah").value);
             const kontak = document.getElementById("kontak").value;
+
+            const totalHarga = jumlah * hargaPerKarung;
 
             const adminPhone = "62881080293621"; // Ganti dengan nomor WhatsApp admin
 
-            const pesan = `Halo Admin, saya ingin memesan pupuk:\n\nNama: ${nama}\nAlamat: ${alamat}\nProduk: ${produk}\nJumlah: ${jumlah} karung\nKontak: ${kontak}`;
+            const pesan = `Halo Admin, saya ingin memesan pupuk:\n\n` +
+                          `Nama: ${nama}\n` +
+                          `Alamat: ${alamat}\n` +
+                          `Produk: ${produk}\n` +
+                          `Jumlah: ${jumlah} karung\n` +
+                          `Kontak: ${kontak}\n` +
+                          `Total Harga: Rp${totalHarga.toLocaleString('id-ID')}`;
 
             const url = `https://wa.me/${adminPhone}?text=${encodeURIComponent(pesan)}`;
 
